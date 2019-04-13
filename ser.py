@@ -8,7 +8,7 @@ def accept_incoming_connections():
     """Sets up handling for incoming clients."""
     while True:
         client, client_address = SERVER.accept()
-        print("%s:%s has connected." % client_address[0])
+        print("%s has connected." % client_address[0])
  
         addresses[client] = client_address
         Thread(target=handle_client, args=(client,client_address,)).start()

@@ -12,6 +12,7 @@ def receive():
         try:
             msg = client_socket.recv(BUFSIZ).decode("utf8")
             msg_list.insert(tkinter.END, msg)
+            
         except OSError:  # Possibly client has left the chat.
             break
 
@@ -37,16 +38,16 @@ top.title("Chatter")
 messages_frame = tkinter.Frame(top)
 my_msg = tkinter.StringVar()  # For the messages to be sent.
 my_msg.set("")
-scrollbar = tkinter.Scrollbar(messages_frame)  # To navigate through past messages.
+scrollbar1 = tkinter.Scrollbar(messages_frame)  # To navigate through past messages.
 # Following will contain the messages.
-msg_list = tkinter.Listbox(messages_frame, width=50, yscrollcommand=scrollbar.set)
-scrollbar.pack(side=tkinter.RIGHT, fill=tkinter.Y)
+msg_list = tkinter.Listbox(messages_frame, width=100, yscrollcommand=scrollbar1.set)
+scrollbar1.pack(side=tkinter.RIGHT, fill=tkinter.Y)
 msg_list.pack(side=tkinter.LEFT, fill=tkinter.BOTH)
 msg_list.pack()
 messages_frame.pack()
 
 entry_field = tkinter.Entry(top, textvariable=my_msg)
-entry_field.bind("f", send)
+entry_field.bind("<Return>", send)
 entry_field.pack()
 send_button = tkinter.Button(top, text="Send", command=send)
 send_button.pack()

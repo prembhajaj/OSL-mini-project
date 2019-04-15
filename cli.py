@@ -29,8 +29,11 @@ def send(event=None):  # event is passed by binders.
 
 def on_closing(event=None):
     """This function is to be called when the window is closed."""
+    
     my_msg.set("{quit}")
     send()
+    #client_socket.close()
+    
 
 top = tkinter.Tk()
 top.title("Chatter")
@@ -41,6 +44,7 @@ my_msg.set("")
 scrollbar1 = tkinter.Scrollbar(messages_frame)  # To navigate through past messages.
 # Following will contain the messages.
 msg_list = tkinter.Listbox(messages_frame, width=100, yscrollcommand=scrollbar1.set)
+scrollbar1.config(command=msg_list.yview)
 scrollbar1.pack(side=tkinter.RIGHT, fill=tkinter.Y)
 msg_list.pack(side=tkinter.LEFT, fill=tkinter.BOTH)
 msg_list.pack()
@@ -58,7 +62,7 @@ top.protocol("WM_DELETE_WINDOW", on_closing)
 HOST = input('Enter host: ')
 PORT = input('Enter port: ')
 if not PORT:
-    PORT = 33000
+    PORT = 33001
 else:
     PORT = int(PORT)
 

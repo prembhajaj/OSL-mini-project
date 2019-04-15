@@ -28,7 +28,7 @@ def receivefile():
     
     
     
-    i+=1
+    
     print(i)
 
 
@@ -40,12 +40,17 @@ def receive():
             msg = client_socket.recv(BUFSIZ).decode("utf8")                
             msg_list.insert(tkinter.END, msg)
             if "Sent a file. Please Check your folder" in msg:
-                
+                global i
                 msg2 = client_socket.recv(BUFSIZ).decode("utf8")
-                f=open("text.txt","w+")
+                a=msg2.find(":")
+                x=msg2[0:a+2]
+                msg2=msg2.replace(x,"")
+                f=open("text"+str(i)+".txt","w+")
                 f.write(msg2)
                 f.close()
-                print("check file")
+                
+                
+                i+=1
             
                     
             

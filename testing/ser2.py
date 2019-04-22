@@ -1,11 +1,9 @@
-#!/usr/bin/env python3
-"""Server for multithreaded (asynchronous) chat application."""
 from socket import AF_INET, socket, SOCK_STREAM
 from threading import Thread
 
 
 def accept_conn():
-    """Sets up handling for incoming clients."""
+    
     while True:
         client, client_address = SERVER.accept()
         print("%s has connected." % client_address[0])
@@ -14,8 +12,8 @@ def accept_conn():
         Thread(target=handle_client, args=(client,client_address,)).start()
 
 
-def handle_client(client,client_address):  # Takes client socket as argument.
-    """Handles a single client connection."""
+def handle_client(client,client_address):  
+    
 
     name = client.recv(BUFSIZ).decode("utf8")
     welcome = 'Welcome %s! To quit, type {quit}' % name
@@ -37,8 +35,8 @@ def handle_client(client,client_address):  # Takes client socket as argument.
             break
 
 
-def broadcast(msg, name=""):  # prefix is for name identification.
-    """Broadcasts a message to all the clients."""
+def broadcast(msg, name=""):  
+    
 
     for sock in clients:
         sock.send(bytes(name, "utf8")+msg)

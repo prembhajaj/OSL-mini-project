@@ -97,6 +97,19 @@ def on_closing(event=None):
     #client_socket.close()
     
 
+top1=tkinter.Tk()
+top1.title("Chat&Share")
+getip = tkinter.StringVar()
+getport = tkinter.StringVar()
+tkinter.Label(top1,text="Enter host",font="Courier 12 bold",fg="black").grid(row=0,column=0)
+
+tkinter.Entry(top1,textvariable=getip,justify= tkinter.CENTER,width=30,bg="PeachPuff",fg="black").grid(row=0,column=1)
+tkinter.Label(top1,text="Enter port",font="Courier 12 bold",fg="black").grid(row=1,column=0)
+tkinter.Entry(top1,textvariable=getport,justify= tkinter.CENTER,width=30,bg="PeachPuff",fg="black").grid(row=1,column=1)
+tkinter.Button(top1,text="Connect",command=top1.destroy).grid(column=1)
+top1.mainloop()
+
+
 top = tkinter.Tk()
 top.title("Chat&Share")
 
@@ -123,8 +136,8 @@ sendfile_button.pack()
 top.protocol("WM_DELETE_WINDOW", on_closing)
 
 #----Now comes the sockets part----
-HOST = input('Enter host: ')
-PORT = input('Enter port: ')
+HOST = getip.get()
+PORT = getport.get()
 if not PORT:
     PORT = 33001
 else:
